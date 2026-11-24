@@ -1,0 +1,90 @@
+{
+  "click": {
+    "sounds": [
+      {
+        "name": "fishclient:click",
+        "stream": false
+      }
+    ]
+  },
+  "toggle_on": {
+    "sounds": [
+      {
+        "name": "fishclient:toggle_on",
+        "stream": false
+      }
+    ]
+  },
+  "toggle_off": {
+    "sounds": [
+      {
+        "name": "fishclient:toggle_off",
+        "stream": false
+      }
+    ]
+  },
+  "menu_open": {
+    "sounds": [
+      {
+        "name": "fishclient:menu_open",
+        "stream": false
+      }
+    ]
+  },
+  "menu_close": {
+    "sounds": [
+      {
+        "name": "fishclient:menu_close",
+        "stream": false
+      }
+    ]
+  },
+  "water_open": {
+    "sounds": [
+      {
+        "name": "fishclient:water_open",
+        "stream": false
+      }
+    ]
+  },
+  "bubbles": {
+    "sounds": [
+      {
+        "name": "fishclient:bubbles",
+        "stream": false
+      }
+    ]
+  },
+  "bid": {
+    "sounds": [
+      {
+        "name": "fishclient:bid",
+        "stream": false
+      }
+    ]
+  },
+  "tick": {
+    "sounds": [
+      {
+        "name": "fishclient:tick",
+        "stream": false
+      }
+    ]
+  },
+  "auction_start": {
+    "sounds": [
+      {
+        "name": "fishclient:auction_start",
+        "stream": false
+      }
+    ]
+  },
+  "auction_end": {
+    "sounds": [
+      {
+        "name": "fishclient:auction_end",
+        "stream": false
+      }
+    ]
+  }
+}

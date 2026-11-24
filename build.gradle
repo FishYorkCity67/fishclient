@@ -1,0 +1,103 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+base {
+	archivesName = 'fishclient'
+}
+
+repositories {
+}
+
+sourceSets {
+	// The automated test is a separate mod that only the "autotest" run loads. It never ends up in the release jar.
+	testmod {
+		compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+		runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+	}
+}
+
+loom {
+	mods {
+		fishclient {
+			sourceSet sourceSets.main
+		}
+		fishclient_test {
+			sourceSet sourceSets.testmod
+		}
+	}
+
+	runs {
+		// Its own folder: the test mutes the sound and leaves a test world and fake payments behind.
+		autotest {
+			client()
+			configName = 'FishClient Autotest'
+			source sourceSets.testmod
+			runDir 'run-test'
+			programArgs '--width', '1920', '--height', '1080'
+		}
+	}
+}
+
+configurations {
+	prodMods {
+		transitive = false
+	}
+}
+
+dependencies {
+	// Minecraft 26.1 is shipped unobfuscated: the code already uses Mojang's names, so no mappings line is needed.
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	prodMods "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+// These start the finished jar on the real game, the way a player's launcher does, in their own folder run-prod.
+tasks.register('testmodJar', Jar) {
+	archiveClassifier = 'testmod'
+	from sourceSets.testmod.output
+}
+
+tasks.register('prodClient', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	mods.from(tasks.named('jar'))
+	mods.from(configurations.prodMods)
+	runDir = layout.projectDirectory.dir('run-prod')
+}
+
+tasks.register('prodAutotest', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+	mods.from(tasks.named('jar'))
+	mods.from(tasks.named('testmodJar'))
+	mods.from(configurations.prodMods)
+	runDir = layout.projectDirectory.dir('run-prod')
+	programArgs.addAll('--width', '1920', '--height', '1080')
+}
+
+processResources {
+	def version = project.version
+	inputs.property 'version', version
+
+	filesMatching('fabric.mod.json') {
+		expand 'version': version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+	it.options.encoding = 'UTF-8'
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	def projectName = project.name
+	inputs.property 'projectName', projectName
+
+	from('LICENSE') {
+		rename { "${it}_$projectName" }
+	}
+}

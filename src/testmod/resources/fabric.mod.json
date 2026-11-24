@@ -1,0 +1,16 @@
+{
+	"schemaVersion": 1,
+	"id": "fishclient_test",
+	"version": "1.0.0",
+	"name": "FishClient Autotest",
+	"description": "Drives the real game through FishClient's features and writes a report. Development only.",
+	"license": "All-Rights-Reserved",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["dev.fishclient.test.AutoTest"]
+	},
+	"mixins": ["fishclient_test.mixins.json"],
+	"depends": {
+		"fishclient": "*"
+	}
+}

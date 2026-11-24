@@ -1,0 +1,28 @@
+{
+	"required": true,
+	"package": "dev.fishclient.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AbstractButtonMixin",
+		"AbstractClientPlayerMixin",
+		"AbstractContainerScreenAccessor",
+		"AvatarRendererMixin",
+		"CameraMixin",
+		"FishingHookAccessor",
+		"FishingHookRendererMixin",
+		"FogRendererMixin",
+		"LevelLoadingScreenMixin",
+		"LightmapExtractorMixin",
+		"MouseHandlerMixin",
+		"OptionsMixin",
+		"ScreenshotMixin",
+		"SkyRendererMixin",
+		"TitleScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

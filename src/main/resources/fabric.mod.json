@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "fishclient",
+	"version": "${version}",
+	"name": "FishClient",
+	"description": "An ocean-themed client mod with HUDs, freelook, zoom, custom skies, cosmetics and auction tools.",
+	"authors": ["FishClient"],
+	"license": "All-Rights-Reserved",
+	"icon": "assets/fishclient/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["dev.fishclient.FishClient"]
+	},
+	"mixins": ["fishclient.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.19.1",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
